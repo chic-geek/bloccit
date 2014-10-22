@@ -3,4 +3,7 @@
 
 [Demo URL](http://bloccit-chris-brett.herokuapp.com/)
 
+#### Setup
+`config/application.example.yml` gives a reference to the ENV Vars used in `config/application.yml`
+
 Made with my mentor at [Bloc](http://bloc.io).
