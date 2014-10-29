@@ -52,6 +52,9 @@ gem 'devise'
 # Figaro gem to create env vars
 gem 'figaro'
 
+# User authorisation using the 'pundit' gem
+gem 'pundit'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

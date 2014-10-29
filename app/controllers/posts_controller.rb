@@ -18,11 +18,13 @@ class PostsController < ApplicationController
   # start by creating an instance var which then stores a new instance of Post class.
   def new
     @post = Post.new
+    authorize @post
   end
 
   # `create` method takes the new post and saves it, throwing back a notice (flash).
   def create
     @post = current_user.posts.build(params.require(:post).permit(:title, :body))
+    authorize @post
     if @post.save
       flash[:notice] = "Post was saved."
       redirect_to @post
@@ -39,6 +41,7 @@ class PostsController < ApplicationController
   # displays all posts on the posts/index page.
   def index
     @posts = Post.all
+    authorize @posts
   end
 
   # we find and display the post by using find method passing in the id as a parameter.
@@ -53,10 +56,12 @@ class PostsController < ApplicationController
   #
   def edit
     @post = Post.find(params[:id])
+    authorize @post
   end
 
   def update
     @post = Post.find(params[:id])
+    authorize @post
     if @post.update_attributes(params.require(:post).permit(:title, :body))
       flash[:notice] = "Post was updated."
       redirect_to @post
@@ -65,5 +70,5 @@ class PostsController < ApplicationController
       render :edit
     end
   end
-
+  
 end
