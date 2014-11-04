@@ -1,5 +1,12 @@
 <h1><%= @post.title %></h1>
-<p><%= @post.body %></p>
-<% if policy(@post).edit? %>
-  <%= link_to "Edit post", edit_post_path(@post), class: 'btn btn-primary' %>
-<% end %>
+
+<div class="row">
+  <div class="col-md-8">
+    <p><%= @post.body %></p>
+  </div>
+  <div class="col-md-4">
+    <% if policy(@post).edit? %>
+      <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>

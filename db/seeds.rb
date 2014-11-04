@@ -1,10 +1,13 @@
 require 'faker'
 
-# Create Users
+## =================================================
+## CREATE USERS
+## =================================================
+## call user.new rather than .create as this instance isn't then
+## immediately saved to the db, because we'd like to skip
+## confirmation at this fake data point.
+## -------------------------------------------------
 5.times do
-  # call user.new rather than .create as this instance isn't then
-  # immediately saved to the db, because we'd like to skip
-  # confirmation at this fake data point.
   user = User.new(
     name:     Faker::Name.name,
     email:    Faker::Internet.email,
@@ -15,17 +18,33 @@ require 'faker'
 end
 users = User.all
 
-# Create the posts
+## =================================================
+## CREATE TOPICS
+## =================================================
+15.times do
+  Topic.create!(
+    name: Faker::Lorem.sentence,
+    description: Faker::Lorem.paragraph
+  )
+end
+topics = Topic.all
+
+## =================================================
+## CREATE POSTS
+## =================================================
 50.times do
   Post.create!(
     user:  users.sample,
+    topic: topics.sample,
     title: Faker::Lorem.sentence,
     body:  Faker::Lorem.paragraph
   )
 end
 posts = Post.all
 
-# Create a few comments
+## =================================================
+## CREATE COMMENTS
+## =================================================
 100.times do
   Comment.create!(
     # user: users.sample, # in prep for associating Users with Comments
@@ -34,10 +53,42 @@ posts = Post.all
   )
 end
 
-User.first.update_attributes!(
-  email: 'c.brett84@gmail.com',
-  password: 'welcome123'
+
+## =================================================
+## CREATE USERS
+## =================================================
+## use .skip_confirmation! method to avoid devises'
+## fully confirming email functionality.
+## -------------------------------------------------
+
+# Create an admin user
+admin = User.new(
+  name:     'Admin User',
+  email:    'admin@example.com',
+  password: 'helloworld',
+  role:     'admin'
 )
+admin.skip_confirmation!
+admin.save!
+
+# Create a moderator user
+moderator = User.new(
+  name:     'Moderator User',
+  email:    'moderator@example.com',
+  password: 'helloworld',
+  role:     'moderator'
+)
+moderator.skip_confirmation!
+moderator.save!
+
+# Create a member user
+member = User.new(
+  name:     'Member User',
+  email:    'member@example.com',
+  password: 'helloworld'
+)
+member.skip_confirmation!
+member.save!
 
 puts "Seed finished"
 puts "#{User.count} users created"

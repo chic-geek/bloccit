@@ -17,14 +17,18 @@ class PostsController < ApplicationController
   #
   # start by creating an instance var which then stores a new instance of Post class.
   def new
+    @topic = Topic.find(params[:topic_id])
     @post = Post.new
     authorize @post
   end
 
   # `create` method takes the new post and saves it, throwing back a notice (flash).
   def create
+    @topic = Topic.find(params[:topic_id])
     @post = current_user.posts.build(params.require(:post).permit(:title, :body))
+    @post.topic = @topic
     authorize @post
+
     if @post.save
       flash[:notice] = "Post was saved."
       redirect_to @post
@@ -39,13 +43,14 @@ class PostsController < ApplicationController
   #### =================================================
   #
   # displays all posts on the posts/index page.
-  def index
-    @posts = Post.all
-    authorize @posts
-  end
+  # def index
+  #   @posts = Post.all
+  #   authorize @posts
+  # end
 
   # we find and display the post by using find method passing in the id as a parameter.
   def show
+    @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
   end
 
@@ -55,13 +60,16 @@ class PostsController < ApplicationController
   #### =================================================
   #
   def edit
+    @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
     authorize @post
   end
 
   def update
+    @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
     authorize @post
+
     if @post.update_attributes(params.require(:post).permit(:title, :body))
       flash[:notice] = "Post was updated."
       redirect_to @post
@@ -70,5 +78,5 @@ class PostsController < ApplicationController
       render :edit
     end
   end
-  
+
 end
