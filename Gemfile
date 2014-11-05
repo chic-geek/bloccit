@@ -55,6 +55,9 @@ gem 'figaro'
 # User authorisation using the 'pundit' gem
 gem 'pundit'
 
+# Redcarpet is a markdown library
+gem 'redcarpet'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
