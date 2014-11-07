@@ -58,6 +58,15 @@ gem 'pundit'
 # Redcarpet is a markdown library
 gem 'redcarpet'
 
+# Carrierwave gem added for image uploading.
+gem 'carrierwave'
+
+# Minimacgick uses imagemagick so make sure to have that on your system.
+gem 'mini_magick'
+
+# Fog gem makes it easier to upload assets to Amazon's S3
+gem 'fog'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
