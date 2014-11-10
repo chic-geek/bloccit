@@ -67,6 +67,9 @@ gem 'mini_magick'
 # Fog gem makes it easier to upload assets to Amazon's S3
 gem 'fog'
 
+# Gem to install simple pagination in Bloccit rails app.
+gem 'will_paginate', '~> 3.0.5'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
