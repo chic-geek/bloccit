@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   has_many :posts
+  has_many :comments
   mount_uploader :avatar, AvatarUploader
 
   # Method called on a given user, which looks at the role stored

@@ -1,5 +1,5 @@
 <h1>
-  <%= image_tag(@post.image.thumb.url) if post.image? %>
+  <%= image_tag(@post.image.thumb.url) if @post.image? %>
   <%= markdown @post.title %>
 </h1>
 
@@ -16,5 +16,13 @@
     <% if policy(@post).edit? %>
       <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-primary' %>
     <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Comments</h2>
+    <%= render partial: 'comments/comment', collection: @comments %>
+    <%= render 'comments/form', topic: @topic, comment: @comment, post: @post %>
   </div>
 </div>

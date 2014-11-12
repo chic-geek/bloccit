@@ -53,6 +53,10 @@ class PostsController < ApplicationController
   def show
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
+
+    # Speak to Eliot to help explain the bottom `.build` method
+    @comments = @post.comments
+    @comment = @post.comments.build
   end
 
 
