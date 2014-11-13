@@ -16,13 +16,17 @@
     <% if policy(@post).edit? %>
       <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-primary' %>
     <% end %>
+    <% if policy(@post).destroy? %>
+      <!-- We must supply an array of instance vars because posts are nested inside topics -->
+      <%= link_to "Delete post", [@topic, @post], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this post?' } %>
+    <% end %>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
     <h2>Comments</h2>
-    <%= render partial: 'comments/comment', collection: @comments %>
-    <%= render 'comments/form', topic: @topic, comment: @comment, post: @post %>
+    <%= render @comments %>
+    <%= render 'comments/form' %>
   </div>
 </div>

@@ -56,7 +56,7 @@ class PostsController < ApplicationController
 
     # Speak to Eliot to help explain the bottom `.build` method
     @comments = @post.comments
-    @comment = @post.comments.build
+    # @comment = @post.comments.build
   end
 
 
@@ -81,6 +81,27 @@ class PostsController < ApplicationController
     else
       flash[:error] = "There was an error when saving the post, please try again."
       render :edit
+    end
+  end
+
+
+  ### =================================================
+  ### DELETE
+  ### =================================================
+  # Process is similar to deleting a topic entry, see topic ctrl for more.
+  #
+  def destroy
+    @topic = Topic.find(params[:topic_id])
+    @post = Post.find(params[:id])
+    title = @post.title
+    authorize @post
+
+    if @post.destroy
+      flash[:notice] = "\"#{title}\" was deleted successful"
+      redirect_to @topic
+    else
+      flash[:error] = "There was an error deleting the post"
+      render :show
     end
   end
 
