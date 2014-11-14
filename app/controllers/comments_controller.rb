@@ -10,30 +10,28 @@ class CommentsController < ApplicationController
     # Get the user_id... this will either be Nil or the current_user.id (whatever # that happens to be)...
     # If comment was saved, redirect to the topics post with success comment else the fail message if it wasn't.
     #
-    @topic = Topic.find(params[:topic_id])
-    @post = @topic.posts.find(params[:post_id])
+    @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
-      redirect_to [@topic, @post], notice: "Comment saved successfully."
+      redirect_to [@post.topic, @post], notice: "Comment saved successfully."
     else
-      redirect_to [@topic, @post], notice: "Comment failed to save."
+      redirect_to [@post.topic, @post], notice: "Comment failed to save."
     end
   end
 
   def destroy
-    @topic = Topic.find(params[:id])
-    @post = @topic.posts.find(params[:id])
+    @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
 
     authorize @comment
 
     if @comment.destroy
       flash[:notice] = "Comment was deleted"
-      redirect_to [@topic, @post]
+      redirect_to [@post.topic, @post]
     else
       flash[:notice] = "There was an error deleting the comment"
-      redirect_to [@topic, @post]
+      redirect_to [@post.topic, @post]
     end
   end
 
