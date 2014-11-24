@@ -39,8 +39,5 @@ class Post < ActiveRecord::Base
 
   def update_rank
     age = (created_at - Time.new(1970,1,1)) / (60 * 60 * 24)
-    new_rank = points + age
-
-    update_attribute(:rank, new_rank)
   end
 end
