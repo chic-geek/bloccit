@@ -4,6 +4,7 @@ describe User do
 
   include TestFactories
 
+  # `NOTE` Ask Eliot to walk through this section on Sunday
   describe "#favorited(post)" do
     xit "returns `nil` if the user has not favorited the post" do
     end

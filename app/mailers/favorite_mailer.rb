@@ -9,6 +9,7 @@ class FavoriteMailer < ActionMailer::Base
     headers["References"] = "<post/#{post.id}@your-app-name.example>"
 
     # `NOTE` Ask Eliot what these three instance vars are for?
+    # Think they are for the html and text mailers but not sure?
     @user = user
     @post = post
     @comment = comment
