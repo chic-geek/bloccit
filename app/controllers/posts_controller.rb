@@ -53,6 +53,7 @@ class PostsController < ApplicationController
   # we find and display the post by using find method passing in the id as a parameter.
   def show
     @topic = Topic.find(params[:topic_id])
+    authorize @topic
     @post = Post.find(params[:id])
 
     # Speak to Eliot to help explain the bottom `.build` method
