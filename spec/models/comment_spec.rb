@@ -10,6 +10,7 @@ describe Comment do
       @post = associated_post
       @user = authenticated_user
       @comment = Comment.new(body: 'My comment', post: @post, user_id: 10000)
+      puts 'hello world'
     end
 
     it "sends an email to users who have favorited the post" do

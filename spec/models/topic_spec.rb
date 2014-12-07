@@ -8,14 +8,14 @@ describe Topic do
 
     describe "publicly_viewable" do
       it "returns a relation of all public topics" do
-        expect(Topic.publicly_viewable).to eq( [@public_topic] )
+        expect(Topic.public).to eq( [@public_topic] )
       end
     end
 
     describe "privately_viewable" do
       it "returns a relation of all private topics" do
         # Your code here
-        expect(Topic.publicly_viewable).to eq([@private_topic])
+        expect(Topic.private).to eq([@private_topic])
       end
     end
 
