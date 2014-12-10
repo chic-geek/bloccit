@@ -74,6 +74,9 @@ gem 'fog'
 # Gem to install simple pagination in Bloccit rails app.
 gem 'will_paginate', '~> 3.0.5'
 
+# Include capybara for feature specs.
+gem 'capybara'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
