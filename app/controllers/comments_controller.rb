@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  respond_to :html, :js
+
   # Fill in the create action. It should create a new comment associated
   # with a post and the current_user who created it.
   #
@@ -28,11 +30,16 @@ class CommentsController < ApplicationController
 
     if @comment.destroy
       flash[:notice] = "Comment was deleted"
-      redirect_to [@post.topic, @post]
+      # redirect_to [@post.topic, @post] # remove when using AJAX for deletion of posts.
     else
       flash[:notice] = "There was an error deleting the comment"
-      redirect_to [@post.topic, @post]
+      # redirect_to [@post.topic, @post] # remove when using AJAX for deletion of posts.
     end
+
+    respond_with(@comment) do |format|
+      format.html { redirect_to [@post.topic, @post] }
+    end
+    
   end
 
   private
