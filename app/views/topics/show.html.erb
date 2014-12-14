@@ -7,10 +7,6 @@
 <div class="row">
   <div class="col-md-8">
     <p class="lead"><%= @topic.description %></p>
-    <!--
-      TODO: Ask Eliot to show the long hand version of this setup
-      Think it's something like, <%= render partial: 'post', collection: @posts %>
-    -->
     <%= render @posts %>
   </div>
 
