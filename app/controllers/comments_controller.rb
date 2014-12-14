@@ -6,19 +6,23 @@ class CommentsController < ApplicationController
   # with a post and the current_user who created it.
   #
   def create
-    # Find topic by the parameter topic_id and assign it the @topic instance var...
-    # Within said topic, grab the post that matched the parameter post_id and assign to @post...
-    # Take that very post and create a new comment with the new parameters set in `comment_params`...
-    # Get the user_id... this will either be Nil or the current_user.id (whatever # that happens to be)...
-    # If comment was saved, redirect to the topics post with success comment else the fail message if it wasn't.
-    #
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.new(comment_params)
-    @comment.user_id = current_user.id
+    @comments = @post.comments
+
+    @comment = current_user.comments.build( comment_params )
+    @comment.post = @post
+    @new_comment = Comment.new
+
+    authorize @comment
+
     if @comment.save
-      redirect_to [@post.topic, @post], notice: "Comment saved successfully."
+      flash[:notice] = "Comment was created."
     else
-      redirect_to [@post.topic, @post], notice: "Comment failed to save."
+      flash[:error] = "There was an error saving the comment. Please try again."
+    end
+
+    respond_with(@comment) do |format|
+      format.html { redirect_to [@post.topic, @post] }
     end
   end
 
@@ -39,7 +43,7 @@ class CommentsController < ApplicationController
     respond_with(@comment) do |format|
       format.html { redirect_to [@post.topic, @post] }
     end
-    
+
   end
 
   private
