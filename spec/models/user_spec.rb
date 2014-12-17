@@ -2,13 +2,11 @@ require 'rails_helper'
 
 describe User do
 
-  include TestFactories
-
   describe "#favorited(post)" do
 
     before do
-      @user = authenticated_user
-      @post = associated_post
+      @user = create(:user)
+      @post = create(:post, user: @user)
     end
 
     it "returns `nil` if the user has not favorited the post" do
@@ -48,5 +46,5 @@ describe User do
       expect( users.first.comments_count ).to eq(2)
     end
   end
-  
+
 end

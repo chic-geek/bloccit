@@ -4,11 +4,9 @@ require 'rails_helper'
 
 describe "Sign in flow" do
 
-  include TestFactories
-
   describe "successful" do
     it "redirects to the topics index" do
-      user = authenticated_user
+      user = create(:user)
       visit topics_path
 
       # We give within a class (.) or ID (#) argument, and a block to be executed within
